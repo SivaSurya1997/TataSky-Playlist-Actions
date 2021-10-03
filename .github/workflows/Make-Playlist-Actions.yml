@@ -79,7 +79,7 @@ jobs:
             mv Tata-Sky-IPTV/.github TataSkyIPTV-Daily/
             cd TataSkyIPTV-Daily/
             git add .
-            git commit --author="ForceGT<thakkargaurav409@gmail.com>" -m "Initial Commit"
+            git commit --author="ForceGT<thakkargaurav409@gmail.com>" -m "Update Repo"
             git push
 
             
