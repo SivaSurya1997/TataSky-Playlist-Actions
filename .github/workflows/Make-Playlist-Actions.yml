@@ -1,0 +1,90 @@
+name: Make-Playlist-Actions
+on:
+ workflow_dispatch:
+  inputs:
+    git_token:
+      description: 'Enter your GitHub Token'     
+      required: true
+    tata_mobile:
+      description: 'Enter your Tata Sky Mobile Number'
+      required: true
+    sub_id:
+      description: 'Enter your Tata Sky Subscriber ID'
+      required: true
+    tata_pass:
+      description: 'Enter your Tata Sky Password'     
+      required: true
+    git_mail:
+      description: 'Enter your GitHub Mail Address'
+      required: true
+    git_id:
+      description: 'Enter your GitHub ID'
+      required: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      
+    - name: Installing Dependencies
+      continue-on-error: true
+      run: |
+            git config --global user.name "${{ github.event.inputs.git_id }}"
+            git config --global user.email "${{ github.event.inputs.git_mail }}"
+            git clone https://github.com/ForceGT/Tata-Sky-IPTV
+            cd Tata-Sky-IPTV/
+            cd code_samples/
+            sudo apt install expect -y
+            wget https://raw.githubusercontent.com/Nageshwar128/exp_tatasky/main/script.exp
+            chmod 755 script.exp
+            sed -i 's/PASSWORD/${{ github.event.inputs.tata_pass }}/g' script.exp
+            sed -i 's/SUB_ID/${{ github.event.inputs.sub_id }}/g' script.exp
+            sed -i 's/MOB_NO/${{ github.event.inputs.tata_mobile }}/g' script.exp
+            ./script.exp
+            touch mytoken.txt
+            echo "${{ github.event.inputs.git_token }}" >> mytoken.txt
+            gh auth login --with-token < mytoken.txt
+            mkdir git-repo/
+            cd git-repo/
+            touch allChannelPlaylist.m3u
+            echo "Initial Test" >> allChannelPlaylist.m3u
+            gh gist create allChannelPlaylist.m3u | tee gist_link.txt
+            sed -i 's/gist/${{ github.event.inputs.git_token }}@gist/g' gist_link.txt
+            gist_url=$(cat gist_link.txt)
+            dir="${gist_url##*/}"
+            git clone https://github.com/ForceGT/Tata-Sky-IPTV
+            gh repo create TataSkyIPTV-Daily --private -y || echo "New repo has been created"
+            mv ../script.exp Tata-Sky-IPTV/code_samples/
+            chmod 755 Tata-Sky-IPTV/code_samples/script.exp
+            cd Tata-Sky-IPTV/
+            mkdir .github
+            cd .github
+            mkdir workflows
+            cd workflows
+            wget https://gist.githubusercontent.com/Nageshwar128/9bb06a83b4fb55d744a0099cf34e8b5d/raw/TataSkyDailyWorkflow.yml
+            wget https://gist.githubusercontent.com/Nageshwar128/469d24f4739c64542c7c4fa074dc95bf/raw/substitute.txt
+            export dir=$dir
+            export gist_url=$gist_url
+            export git_id=${{ github.event.inputs.git_id }}
+            export git_token=${{ github.event.inputs.git_token }}
+            export git_mail=${{ github.event.inputs.git_mail }}
+            cat substitute.txt | envsubst >> TataSkyDailyWorkflow.yml
+            rm substitute.txt
+            cd ../..
+            rm -rf .git
+            cd ..
+            git clone https://${{ github.event.inputs.git_token }}@github.com/${{ github.event.inputs.git_id }}/TataSkyIPTV-Daily
+            rm -rf TataSkyIPTV-Daily/*
+            rm -rf TataSkyIPTV-Daily/.github
+            mv Tata-Sky-IPTV/* TataSkyIPTV-Daily/
+            mv Tata-Sky-IPTV/.github TataSkyIPTV-Daily/
+            cd TataSkyIPTV-Daily/
+            git add .
+            git commit --author="ForceGT<thakkargaurav409@gmail.com>" -m "Initial Commit"
+            git push
+
+            
+            
+            
+            
+
+            
