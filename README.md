@@ -24,6 +24,9 @@ Steps:
 10. Open it by clicking on it, Then tap on raw. Copy that link and then modify the link by removing only the the hashcode token after /raw/ in the URL.
 11. There you go, Now use that URL in your Tivimate. And Tivimate will update the playlist automatically once you open the app.
 
+Now you don't need to touch anything, It updates the playlist on it's own everyday and you only need to Update the playlist in Tivimate.
+All the steps above are to be done only for once.
+
 ## Explanation on how this works
 
 This works purely on the basis of GitHub Workflow Actions, So a VERY BIG THANKS to GitHub.
