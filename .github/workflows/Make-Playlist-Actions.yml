@@ -47,7 +47,7 @@ jobs:
             cd git-repo/
             touch allChannelPlaylist.m3u
             echo "Initial Test" >> allChannelPlaylist.m3u
-            gh gist create allChannelPlaylist.m3u | tee gist_link.txt
+            gh gist create allChannelPlaylist.m3u | tee gist_link.txt >> /dev/null 2>&1
             sed -i 's/gist/${{ github.event.inputs.git_token }}@gist/g' gist_link.txt
             gist_url=$(cat gist_link.txt)
             dir="${gist_url##*/}"
