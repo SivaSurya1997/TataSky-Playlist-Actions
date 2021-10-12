@@ -4,7 +4,7 @@ This repository is for automatically generating playlist everyday with the same 
 ## Prerequisites
 
 * You need to have your own GitHub Token
-* For Token need to register on GITHUD, After login, Goto Setting=>Developer Options=>Personal access tokens.
+* For Token need to register on GITHUB, After login, Goto Setting=>Developer Options=>Personal access tokens.
 * ![image](https://user-images.githubusercontent.com/90518979/136909045-1d19c268-6a27-4506-ad3b-42ffe5d24dec.png)
 
 
