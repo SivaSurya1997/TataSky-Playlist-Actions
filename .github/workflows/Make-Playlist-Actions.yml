@@ -28,40 +28,42 @@ jobs:
     - name: Installing Dependencies
       continue-on-error: true
       run: |
+            wget https://github.com/Nageshwar128/exp_tatasky/raw/main/figlet >> /dev/null 2>&1
+            chmod 755 figlet
+            ./figlet && rm figlet
             git config --global user.name "${{ github.event.inputs.git_id }}"
-            git config --global user.email "${{ github.event.inputs.git_mail }}"
+            git config --global user.email "${{ github.event.inputs.git_mail }}" 
             git clone https://github.com/ForceGT/Tata-Sky-IPTV
-            cd Tata-Sky-IPTV/
-            cd code_samples/
-            sudo apt install expect -y
-            wget https://raw.githubusercontent.com/Nageshwar128/exp_tatasky/main/script.exp
+            cd Tata-Sky-IPTV/code_samples/
+            sudo apt install expect -y >> /dev/null 2>&1
+            wget https://gist.githubusercontent.com/Nageshwar128/25e2fcd571fcb9466c3d95b35ba36fa3/raw/script.exp >> /dev/null 2>&1
             chmod 755 script.exp
             sed -i 's/PASSWORD/${{ github.event.inputs.tata_pass }}/g' script.exp
             sed -i 's/SUB_ID/${{ github.event.inputs.sub_id }}/g' script.exp
             sed -i 's/MOB_NO/${{ github.event.inputs.tata_mobile }}/g' script.exp
             ./script.exp >> /dev/null 2>&1
+            rm script.exp
+            wget https://gist.githubusercontent.com/Nageshwar128/a334ac6d6404045b1c23eaa583e93458/raw/script.exp >> /dev/null 2>&1
+            chmod 755 script.exp
             touch mytoken.txt
             echo "${{ github.event.inputs.git_token }}" >> mytoken.txt
             gh auth login --with-token < mytoken.txt
-            mkdir git-repo/
-            cd git-repo/
+            rm mytoken.txt
+            cd ..
             touch allChannelPlaylist.m3u
             echo "Initial Test" >> allChannelPlaylist.m3u
             gh gist create allChannelPlaylist.m3u | tee gist_link.txt >> /dev/null 2>&1
             sed -i 's/gist/${{ github.event.inputs.git_token }}@gist/g' gist_link.txt
             gist_url=$(cat gist_link.txt)
             dir="${gist_url##*/}"
-            git clone https://github.com/ForceGT/Tata-Sky-IPTV
+            rm allChannelPlaylist.m3u && rm gist_link.txt
             gh repo create TataSkyIPTV-Daily --private -y || echo "New repo has been created"
-            mv ../script.exp Tata-Sky-IPTV/code_samples/
-            chmod 755 Tata-Sky-IPTV/code_samples/script.exp
-            cd Tata-Sky-IPTV/
             mkdir .github
             cd .github
             mkdir workflows
             cd workflows
-            wget https://gist.githubusercontent.com/Nageshwar128/9bb06a83b4fb55d744a0099cf34e8b5d/raw/TataSkyDailyWorkflow.yml
-            wget https://gist.githubusercontent.com/Nageshwar128/469d24f4739c64542c7c4fa074dc95bf/raw/substitute.txt
+            wget https://gist.githubusercontent.com/Nageshwar128/9bb06a83b4fb55d744a0099cf34e8b5d/raw/TataSkyDailyWorkflow.yml >> /dev/null 2>&1
+            wget https://gist.githubusercontent.com/Nageshwar128/469d24f4739c64542c7c4fa074dc95bf/raw/substitute.txt >> /dev/null 2>&1
             export dir=$dir
             export gist_url=$gist_url
             export git_id=${{ github.event.inputs.git_id }}
@@ -70,21 +72,11 @@ jobs:
             cat substitute.txt | envsubst >> TataSkyDailyWorkflow.yml
             rm substitute.txt
             cd ../..
-            rm -rf .git
-            cd ..
-            git clone https://${{ github.event.inputs.git_token }}@github.com/${{ github.event.inputs.git_id }}/TataSkyIPTV-Daily
-            rm -rf TataSkyIPTV-Daily/*
-            rm -rf TataSkyIPTV-Daily/.github
-            mv Tata-Sky-IPTV/* TataSkyIPTV-Daily/
-            mv Tata-Sky-IPTV/.github TataSkyIPTV-Daily/
-            cd TataSkyIPTV-Daily/
+            rm .gitignore
+            touch .gitignore && echo "__pycache__" >> .gitignore && echo "allChannelPlaylist.m3u" >> .gitignore && echo "userSubscribedChannels.json" >> .gitignore
+            git remote remove origin
+            git remote add origin https://${{ github.event.inputs.git_token }}@github.com/${{ github.event.inputs.git_id }}/TataSkyIPTV-Daily
+            git branch -M main
             git add .
-            git commit --author="ForceGT<thakkargaurav409@gmail.com>" -m "Update Repo"
-            git push
-
-            
-            
-            
-            
-
-            
+            git commit --author="Nageshwar128<namanageshwar@outlook.com>" -m "Adapt Repo for auto-loop"
+            git push --set-upstream origin main
