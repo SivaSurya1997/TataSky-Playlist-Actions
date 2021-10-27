@@ -39,7 +39,7 @@ All the steps above are to be done only for once.
 ## Explanation on how this works
 
 This works purely on the basis of GitHub Workflow Actions, So a VERY BIG THANKS to GitHub.
-I've created the script where Actions will automatically trigger the workflow everyday for 7:13 PM UTC.
+I've created the script where Actions will automatically trigger the workflow everyday for 2:30 AM IST.
 
 The tokens, GitHub email and ID are required because we are basically creating another repo and gists with this script using them.
 
