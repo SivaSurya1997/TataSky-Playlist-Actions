@@ -8,33 +8,36 @@
 * For Token need to register on GITHUB, After login, Goto Setting=>Developer Options=>Personal access tokens.
  ![image](https://i.ibb.co/4mrVJpv/Github-Actions.png)
 
-
 * Tata Sky account details (Like Subscriber ID, Tata Sky Account Password, Tata Sky Registered Phone number)
 
 * Your GitHub Email and UserID which you're using now
 
-## How to use?
+## Steps for usage
 
-Steps:
 1. First of all fork this repo.
 2. Then go to Actions Tab in your forked-repo. ![image](https://i.ibb.co/km2D2zJ/Trace-Actions.png)
-
 3. Now enter all your details.
 4. Click on "Run Wokflow"
 5. After clicking on Run Workflow, A new repository will be created in your account named "TataSkyIPTV-Daily"
-6. Go to the new repository named "TataSkyIPTV-Daily"
-7. Now under actions click on Run Workflow
- ![image](https://i.ibb.co/YRZHFny/breh.png)
-
-8. Once the workflow has been successful, Check your [GitHub gists](https://gist.github.com/) then click on view your Gists.
-9. Now you'll see that you'll have allChannelPlaylist there.
-10. Open it by clicking on it, Then tap on raw. Copy that link and then modify the link by removing only the the hashcode token after /raw/ in the URL.
-11. There you go, Now use that URL in your Tivimate. And Tivimate will update the playlist automatically once you open the app.
-12. ![image](https://user-images.githubusercontent.com/90518979/136909762-9fed542f-21cb-4194-a71f-79e6aa016b01.png)
+6. Check your [GitHub gists](https://gist.github.com/) then click on 'view your Gists'.
+7. Now you'll see that you'll have allChannelPlaylist there.
+8. Open it by clicking on it, Then tap on raw. Copy that link and then modify the link by removing only the the hashcode token after /raw/ in the URL.
+9. There you go, Now use that URL in your Tivimate. And Tivimate will update the playlist automatically once you open the app.
+10. ![image](https://user-images.githubusercontent.com/90518979/136909762-9fed542f-21cb-4194-a71f-79e6aa016b01.png)
 
 
 Now you don't need to touch anything, It updates the playlist on it's own everyday and you only need to Update the playlist in Tivimate.
-All the steps above are to be done only for once.
+All the steps above are to be done only for once. Please Star my repo if you've liked my work! :)
+
+## FAQs
+
+Q. Does playlist still work if I change Tata Sky Password?
+
+A. No, It doesn't. Incase you changed your Tata Sky Password, You need to run this workflow again.
+
+Q. My Workflow fails.
+
+A. Make sure that you've gave necessary permissions while creation of the token.
 
 ## Explanation on how this works
 
