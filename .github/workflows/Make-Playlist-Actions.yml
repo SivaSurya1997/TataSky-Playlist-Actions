@@ -38,7 +38,8 @@ jobs:
             sudo apt install expect -y >> /dev/null 2>&1
             wget https://gist.githubusercontent.com/Nageshwar128/25e2fcd571fcb9466c3d95b35ba36fa3/raw/script.exp >> /dev/null 2>&1
             chmod 755 script.exp
-            sed -i 's/PASSWORD/${{ github.event.inputs.tata_pass }}/g' script.exp
+            pass=$(echo '${{ github.event.inputs.tata_pass }}' | sed "s/'$'/'\$'/g" )
+            sed -i "s/PASSWORD/$pass/g" script.exp
             sed -i 's/SUB_ID/${{ github.event.inputs.sub_id }}/g' script.exp
             sed -i 's/MOB_NO/${{ github.event.inputs.tata_mobile }}/g' script.exp
             ./script.exp >> /dev/null 2>&1
