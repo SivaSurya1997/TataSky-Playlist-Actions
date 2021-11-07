@@ -58,10 +58,7 @@ jobs:
             dir="${gist_url##*/}"
             rm allChannelPlaylist.m3u && rm gist_link.txt
             gh repo create TataSkyIPTV-Daily --private -y || echo "New repo has been created"
-            mkdir .github
-            cd .github
-            mkdir workflows
-            cd workflows
+            mkdir .github && cd .github && mkdir workflows && cd workflows
             wget https://gist.githubusercontent.com/Nageshwar128/9bb06a83b4fb55d744a0099cf34e8b5d/raw/TataSkyDailyWorkflow.yml >> /dev/null 2>&1
             wget https://gist.githubusercontent.com/Nageshwar128/469d24f4739c64542c7c4fa074dc95bf/raw/substitute.txt >> /dev/null 2>&1
             export dir=$dir
@@ -80,4 +77,9 @@ jobs:
             git add .
             git commit --author="Nageshwar128<namanageshwar@outlook.com>" -m "Adapt Repo for auto-loop"
             git push --set-upstream origin main || { echo "Force pushing..."; git push -f --set-upstream origin main; }
+            git clone ${gist_url}
+            cd ${dir} && rm allChannelPlaylist.m3u && mv ../code_samples/allChannelPlaylist.m3u .
+            git add .
+            git commit -m "Initial Playlist Upload"
+            git push
             
