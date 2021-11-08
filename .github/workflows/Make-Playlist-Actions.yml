@@ -78,7 +78,7 @@ jobs:
             git add .
             git commit --author="Nageshwar128<namanageshwar@outlook.com>" -m "Adapt Repo for auto-loop"
             git push --set-upstream origin main || { echo "Force pushing..."; git push -f --set-upstream origin main; }
-            git clone ${gist_url}
+            git clone ${gist_url} >> /dev/null 2>&1
             cd ${dir} && rm allChannelPlaylist.m3u && mv ../code_samples/allChannelPlaylist.m3u .
             git add .
             git commit -m "Initial Playlist Upload"
