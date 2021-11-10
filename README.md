@@ -15,10 +15,25 @@
 ## Steps for usage
 
 1. First of all fork this repo.
-2. Then go to Actions Tab in your forked-repo. ![image](https://i.ibb.co/km2D2zJ/Trace-Actions.png)
-3. Now enter all your details.
-4. Click on "Run Wokflow"
-5. After clicking on Run Workflow, A new repository will be created in your account named "TataSkyIPTV-Daily"
+2. Then go to Settings > Secrets > 'New Repository Secret'
+
+   Now fill the values as described below!
+
+
+   ```text
+   GIT_ID : Enter your 'GitHub ID' in the values section.
+   GIT_MAIL : Enter your 'GitHub name' in the values section.
+   GIT_TOKEN : Enter your 'GitHub Token' in the values section.
+   SUB_ID : Enter your 'TataSky Subscriber ID' in the values section.
+   TATA_MOBILE : Enter your 'TataSky Mobile Number' in the values section.
+   TATA_PASS : Enter your 'Tatasky Password' in the values section.
+   ```
+   Like this: ![image](https://i.ibb.co/Jq7wL1W/Screenshot-2021-11-10-164620.png)
+
+   Total 6 values.
+
+4. Now, go to 'Actions' Tab, Click on "Run Wokflow"
+5. After clicking on Run Workflow, A new repository will be created in your account named "TataSkyIPTV-Daily". Now this is your 
 6. Check your [GitHub gists](https://gist.github.com/) then click on 'view your Gists'.
 7. Now you'll see that you'll have allChannelPlaylist there.
 8. Open it by clicking on it, Then tap on raw. Copy that link and then modify the link by removing only the the hashcode token after /raw/ in the URL.
