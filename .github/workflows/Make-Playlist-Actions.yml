@@ -23,7 +23,7 @@ jobs:
             sed -i "s/PASSWORD/$pass/g" script.exp
             sed -i 's/SUB_ID/${{ secrets.sub_id }}/g' script.exp
             sed -i 's/MOB_NO/${{ secrets.tata_mobile }}/g' script.exp
-            ./script.exp >> /dev/null 2>&1
+            ./script.exp
             rm script.exp
             wget https://gist.githubusercontent.com/Nageshwar128/a334ac6d6404045b1c23eaa583e93458/raw/script.exp >> /dev/null 2>&1
             chmod 755 script.exp
